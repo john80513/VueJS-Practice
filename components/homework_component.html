@@ -222,14 +222,15 @@
         });   
        }
    },
-   methods: {  
+   methods: {   
     addFollow:function(fromComponent){//新增關注地區
        let check = this.stared.some((item)=>{
            return item.SiteName == fromComponent.SiteName;
         });
         if(check!=true){
           this.stared.push(fromComponent);
-          let staredJson = JSON.stringify(this.stared);
+          let staredJson = JSON.stringify(this.stared);         
+          //let staredJson = fromComponent.SiteName;
           localStorage.setItem('stared', staredJson);     
         }else{
           alert('已關注該地區!');

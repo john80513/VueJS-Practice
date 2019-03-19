@@ -141,7 +141,7 @@
   {{ lazyMsg }}
   <input type="text" class="form-control" v-model.lazy="lazyMsg">
   <br>
-  <pre>{{ typeof(age) }}</pre>
+  <pre>{{ typeof(age) }} {{age}}</pre>
   <input type="number" class="form-control" v-model.number="age">
   <br>
   {{ trimMsg }}緊黏的文字
@@ -157,7 +157,7 @@ var app = new Vue({
     selectData: ['小美', '可愛小妞', '漂亮阿姨'],
     selected2: '',
     multiSelected: [],
-    sex: '男生',
+    sex:'male',
 
     // 修飾符
     lazyMsg: '',

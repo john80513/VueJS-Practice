@@ -134,7 +134,14 @@
       {{ key }} - {{ item.name }} {{ item.age }} 歲 <input type="text">
     </li>
   </ul>
-  <button class="btn btn-outline-primary" @click="reverseArray">反轉陣列</button>
+  <button class="btn btn-outline-primary" @click="reverseArray">反轉陣列(有綁定key)</button>
+
+  <ul>
+    <li v-for="(item, key) in arrayData">
+      {{ key }} - {{ item.name }} {{ item.age }} 歲 <input type="text">
+    </li>
+  </ul>
+  <button class="btn btn-outline-primary" @click="reverseArray">反轉陣列(無綁定key)</button>
 
   <h4>Filter</h4>
   <p>請製作過濾資料</p>

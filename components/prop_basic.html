@@ -124,9 +124,12 @@
   <h2>靜態傳遞</h2>
   <photo img-url='https://images.unsplash.com/photo-1522204538344-922f76ecc041?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=50e38600a12d623a878983fc5524423f&auto=format&fit=crop&w=1351&q=80'></photo>
   <h2>動態傳遞</h2>
+  <!-- v-bind動態綁定props:imgUrl(在標籤使用不可使用駝峰式寫法，dash加上小寫更改寫法) -->
   <photo :img-url="url"></photo>
 </div>
 
+
+<!-- component 所綁定之模板(可共用) -->
 <script type="text/x-template" id="photo">
 <div>
   <img :src="imgUrl" class="img-fluid" alt="" />
@@ -135,10 +138,9 @@
 </script>
 
 <script>
-Vue.component('photo', {
-  // 同學請依據課程內容，自行填寫 Props 的寫法
-  props:['imgUrl'],
-  template: '#photo'
+Vue.component('photo', {//photo=>此component自訂義名稱
+  props:['imgUrl'],//props:定義要由外傳入的參數名稱
+  template: '#photo'//綁定模板
 })
 
 var app = new Vue({

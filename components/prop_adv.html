@@ -129,8 +129,8 @@
   <div class="row">
     <div class="col-sm-4">
       {{user.email}}
-        <!-- 可使用v-if來延遲渲染產生時有時間插之資料(ajax) -->
-      <card :user-data="user" v-if="user.phone"></card>
+        <!-- 可使用v-if判斷來延遲渲染產生時有時間差之資料(ajax) -->
+      <card :user-data="userFromApp" v-if="userFromApp.phone"></card>
     </div>
   </div>
 
@@ -176,19 +176,12 @@
 Vue.component('photo', {
   props: ['imgUrl'],
   template: '#photo',
-  data: function(){ //雙向綁定
+  data: function(){ 
       return {
-        newImgUrl:this.imgUrl
+        newImgUrl:this.imgUrl //雙向綁定，將由props接入的資料指定到內部新參數上
       }
 
   }
-
-  // 解答：
-  // data: function () {
-  //   return {
-  //     newUrl: this.imgUrl
-  //   }
-  // }
 })
 
 Vue.component('card', {
@@ -223,7 +216,7 @@ Vue.component('keepCard', {
 var app = new Vue({
   el: '#app',
   data: {
-    user: {},
+    userFromApp: {},
     url: 'https://images.unsplash.com/photo-1522204538344-922f76ecc041?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=50e38600a12d623a878983fc5524423f&auto=format&fit=crop&w=1351&q=80',
     isShow: true 
   },
@@ -233,7 +226,7 @@ var app = new Vue({
       url: 'https://randomuser.me/api/',
       dataType: 'json',
       success: function(data) {
-        vm.user = data.results[0];
+        vm.userFromApp = data.results[0];
       }
     });
   }

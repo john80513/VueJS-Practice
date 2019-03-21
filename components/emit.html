@@ -123,10 +123,9 @@
 <div id="app">
   <h2>透過 emit 向外傳遞資訊</h2>
   我透過元件儲值了 {{ cash }} 元
-  <button class="btn btn-primary" @click="add">press me</button>
-  <button-counter @increment="add"></button-counter>
+  <!-- 由emit傳出之參數帶入外部的add方法 -->
+  <button-counter @increment="add"></button-counter> 
   <hr>
-  <button-counter></button-counter>
 </div>
 
 <script>
@@ -142,7 +141,7 @@ Vue.component('buttonCounter', {
   },
   methods: {
     incrementCounter:function(){
-        this.$emit('increment', Number(this.counter))
+        this.$emit('increment', Number(this.counter))//emit(給外部bindding之自訂義名稱,向外傳遞之參數)
 
     }
   }
@@ -154,8 +153,7 @@ var app = new Vue({
     cash: 300
   },
   methods: {
-    add:function(fromComponent){
-    
+    add:function(fromComponent){    
         this.cash = this.cash+fromComponent;
     }
   }

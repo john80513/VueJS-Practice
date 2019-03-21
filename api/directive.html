@@ -110,8 +110,7 @@ Vue.directive('focus', {
 
 Vue.directive('validator', {
   update: function(el, binding, vnode) {//el為元素(html tag)本身
-    //console.log('update', el.value, el.className, vnode);
-
+   
     // 尋找當前的 model 名稱
     var currentModel = vnode.data.directives.find(function(o) {
         return o.name === 'model';
@@ -130,26 +129,23 @@ Vue.directive('validator', {
   },
   bind: function(el, binding, vnode) {
     console.log('bind', el, binding, vnode);
-    el.className = binding.value.className
+    
+    el.className = binding.value.className//抓取外部傳入v-validator之值
 
     var currentModel = vnode.data.directives.find(function(o) {
         return o.name === 'model';
-    }).expression;
-    var value = vnode.context[currentModel];
+    }).expression;//抓取目前model binding的名稱
 
-    var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    if (!re.test(value)) {
-      el.className = 'form-control is-invalid'
-    } else {
-      el.className = 'form-control is-valid'
-    }
+    var value = vnode.context[currentModel];//抓取目前model binding的值 
+
+    console.log(currentModel,value);
   }
 });
 
 var app = new Vue({
   el: '#app',
   data: {
-    email: 'aaa',
+    email: 'aaa@vv.com',
   },
   mounted: function() {
     console.log('Vue init:', this)

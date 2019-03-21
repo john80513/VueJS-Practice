@@ -148,7 +148,7 @@
 <div id="app" class="text-center">
   <h3>Let's check out the lifecycle of this hur' child.</h3>
   <h4>Check the console!</h4>
-  <button @click="toggleShow" class="btn btn-primary">
+  <button @click="isShowing=!isShowing" class="btn btn-primary">
     <span v-if="isShowing">Hide child</span>
     <span v-else>Show child</span>
   </button>

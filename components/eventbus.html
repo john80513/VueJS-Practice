@@ -144,6 +144,7 @@
   </div>
 </div>
 </script>
+
 <script type="text/x-template" id="dangerComponent">
 <div class="card text-white bg-danger mb-3">
   <div class="card-header">紅色組件</div>
@@ -161,6 +162,8 @@
 // 說明：https://vuejs.org/v2/style-guide/#Non-flux-state-management-use-with-caution
 // 此方法適合用在小型專案，大型專案請謹慎使用
 
+Vue.prototype.$eventbus = new Vue();
+
 Vue.component('primary-component', {
   template: '#primaryComponent',
   data: function() {
@@ -171,12 +174,18 @@ Vue.component('primary-component', {
   },
   methods: {
     pushtoDanger: function() {
+      console.log('pushtoDanger', this.msg);
+      this.$eventbus.$emit('pushtoDanger', this.msg);
     }
   },
   mounted: function (){
-    var vm = this;
+    var vm = this;   
+    vm.$eventbus.$on('pushtoPrimary', function (msg) {
+      vm.data.push(msg)
+    })   
   }
 });
+
 Vue.component('danger-component', {
   template: '#dangerComponent',
   data: function() {
@@ -187,9 +196,15 @@ Vue.component('danger-component', {
   },
   methods: {
     pushtoPrimary: function() {
+      this.$eventbus.$emit('pushtoPrimary', this.msg);
     }
   },
   mounted: function (){
+    var vm = this;
+    vm.$eventbus.$on('pushtoDanger', function (msg) {
+      console.log('pushtoDanger', msg)
+      vm.data.push(msg)
+    })
   }
 });
 
